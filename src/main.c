@@ -3,8 +3,8 @@
  * a test, it does not do a full test of the functions. You should write your
  * own tests in tests.c.
  * 
- * Student Name:
- * Semester:
+ * Student Name: Sitong Zhang
+ * Semester: 2025 Fall
 */
 
 #include <stdio.h>  // basic input and output
