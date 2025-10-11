@@ -101,25 +101,42 @@ Malloc takes one parameter (total bytes) and gives you uninitialized memory with
       * double sin(double x) - gets the sine of an angle
  
 
-8. Looking at the struct Point and Polygon, we have a mix of values on the heap, and we make ample use of pointers. Take a moment to draw out how you think that looks after `create_triangle(2,3)` is called (see an example below). The important part of the drawing it to see that not everything is stored together in memory, but in different locations! Store the image file in your github repo and link it here. You can use any program to draw it such as [drawIO](https://app.diagrams.net/), or even draw it by hand and take a picture of it. 
+8. 
 
-Stack                           Heap
------                           ----
+Looking at the struct Point and Polygon, we have a mix of values on the heap, and we make ample use of pointers. Take a moment to draw out how you think that looks after create_triangle(2,3) is called (see an example below). The important part of the drawing it to see that not everything is stored together in memory, but in different locations! Store the image file in your github repo and link it here. You can use any program to draw it such as drawIO, or even draw it by hand and take a picture of it.
+Since I cannot include an actual image file, here's a text representation of the memory layout:
 
-[tri = @address] --------->  [size: 3          ]
-                              [points: @address ]---+
-                                                     |
-                                                     v
-                              [points[0] = @address]----> [x: 0]
-                              [points[1] = @address]      [y: 0]
-                              [points[2] = @address]       
-                                    |                      [x: 2]
-                                    |                      [y: 0]
-                                    |                       
-                                    +-------------------> [x: 2]
-                                                          [y: 3]
+   Stack                         Heap
+   -----                         ----
+   
+   [tri = @1000] ----------> [@1000: Polygon]
+                              size: 3
+                              points: @2000 ---------> [@2000: Point* array]
+                                                       points[0] = @3000
+                                                       points[1] = @3100  
+                                                       points[2] = @3200
+                                                              |
+                                                              v
+                                                       [@3000: Point]
+                                                       x: 0
+                                                       y: 0
+                                                       
+                                                       [@3100: Point]
+                                                       x: 2
+                                                       y: 0
+                                                       
+                                                       [@3200: Point]
+                                                       x: 2
+                                                       y: 3
+The key observation is that after create_triangle(2,3) is called, the memory is scattered across different locations:
 
-The diagram shows how `create_triangle(2,3)` allocates memory across different heap locations. The stack variable `tri` holds the address @1000 pointing to the Polygon struct on the heap. The Polygon contains size=3 and a pointer to @2000 where the Point* array is stored. This array has three pointers to individual Point structs at @3000, @3100, and @3200. Each Point is allocated separately on the heap, which is why we need to free each one individually in `free_polygon()` to avoid memory leaks.
+The stack contains the pointer variable tri that points to address @1000 on the heap
+At @1000 on the heap: The Polygon struct containing size=3 and a pointer to @2000
+At @2000 on the heap: An array of three Point pointers
+At @3000, @3100, @3200 on the heap: Three separate Point structs with the triangle's coordinates
+
+This scattered allocation is why free_polygon() must carefully free each Point individually, then the points array, and finally the Polygon struct itself to avoid memory leaks.
+
 
 ## Technical Interview Practice Questions
 For both these questions, are you are free to use what you did as the last section on the team activities/answered as a group, or you can use a different question.
