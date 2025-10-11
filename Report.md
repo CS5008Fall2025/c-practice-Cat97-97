@@ -99,7 +99,6 @@ Malloc takes one parameter (total bytes) and gives you uninitialized memory with
       * double sqrt(double x) - gets the square root
       * double pow(double base, double exponent) - raises a number to a power
       * double sin(double x) - gets the sine of an angle
- 
 
 8. 
 
@@ -138,6 +137,7 @@ At @3000, @3100, @3200 on the heap: Three separate Point structs with the triang
 This scattered allocation is why free_polygon() must carefully free each Point individually, then the points array, and finally the Polygon struct itself to avoid memory leaks.
 
 
+
 ## Technical Interview Practice Questions
 For both these questions, are you are free to use what you did as the last section on the team activities/answered as a group, or you can use a different question.
 
@@ -171,7 +171,7 @@ Add any references you use here. Use ACM style formatting, adding to the numbers
 
 6. Python Software Foundation. 2024. Python Memory Management. Python Documentation. Retrieved October 10, 2025 from https://docs.python.org/3/c-api/memory.html
 
-9. Looking at the struct Point and Polygon, we have a mix of values on the heap, and we make ample use of pointers. Take a moment to draw out how you think that looks after `create_triangle(2,3)` is called (see an example below). The important part of the drawing it to see that not everything is stored together in memory, but in different locations! Store the image file in your github repo and link it here. You can use any program to draw it such as [drawIO](https://app.diagrams.net/), or even draw it by hand and take a picture of it. 
+7. Looking at the struct Point and Polygon, we have a mix of values on the heap, and we make ample use of pointers. Take a moment to draw out how you think that looks after `create_triangle(2,3)` is called (see an example below). The important part of the drawing it to see that not everything is stored together in memory, but in different locations! Store the image file in your github repo and link it here. You can use any program to draw it such as [drawIO](https://app.diagrams.net/), or even draw it by hand and take a picture of it. 
 
 
 
