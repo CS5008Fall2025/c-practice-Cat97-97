@@ -46,9 +46,9 @@ typedef struct {
  * of the variables in the calling function. 
 **/
 void swap(int *a, int *b){
-	int temp =*a;
-	*a = *b;
-	*b = temp;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 /**
@@ -90,21 +90,22 @@ void print_array(int *arr, int size)
  * here is a quick list of numbers: https://www.math.net/list-of-fibonacci-numbers
  **/
 int* create_array_of_ints_fib(int size){
-   //Handle edge cases
-   if (size <= 0){ 
-		return NULL;
-}
-   // Allocate memory for the array
-   int* arr = (int*)malloc(size * sizeof(int));
-   if (arr == NULL) {
+    // Handle edge cases
+    if (size <= 0) {
         return NULL;
     }
     
-   // First element is always 1
-   arr[0] = 1;
+    // Allocate memory for the array
+    int* arr = (int*)malloc(size * sizeof(int));
+    if (arr == NULL) {
+        return NULL;
+    }
+    
+    // First element is always 1
+    arr[0] = 1;
     
     // If size is 1, return the array with just one element
-   if (size == 1) {
+    if (size == 1) {
         return arr;
     }
     
@@ -118,6 +119,7 @@ int* create_array_of_ints_fib(int size){
     
     return arr;
 }
+
 /**
  * Reverses an array *in place* (meaning you don't copy into another array)
  * 
@@ -134,6 +136,8 @@ void reverse_array(int *arr, int size){
         swap(&arr[i], &arr[size - 1 - i]);
     }
 }
+
+
  
 /**
  * Doubles the size of an array, and copies all previous values into the new array.
@@ -374,3 +378,4 @@ double calculate_polygon_area(Polygon *p){
     return area / 2.0;
 }
 
+#endif // C_PRACTICE_H
